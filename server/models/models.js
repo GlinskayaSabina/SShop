@@ -59,7 +59,7 @@ Item.belongsTo(Brand);
 Item.hasMany(BasketItem);
 BasketItem.belongsTo(Item);
 
-Item.hasMany(ItemInfo);
+Item.hasMany(ItemInfo, { as: "info" });
 ItemInfo.belongsTo(Item);
 
 Type.belongsToMany(Brand, { through: TypeBrand });
