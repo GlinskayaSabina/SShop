@@ -59,7 +59,14 @@ class ItemController {
     return res.json(items);
   }
 
-  async getOne(req, res) {}
+  async getOne(req, res) {
+    const { id } = req.params;
+    const item = await Item.findOne({
+      where: { id },
+      include: [{ model: ItemInfo, as: "info" }],
+    });
+    return res.json(item);
+  }
 
   /*async deleteItem(id) {
     if (!id) {
