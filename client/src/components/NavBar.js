@@ -6,8 +6,9 @@ import Container from "react-bootstrap/Container";
 import NavLink from "react-bootstrap/esm/NavLink";
 import { SHOP_ROUTE } from "../utils/consts";
 import { Button } from "react-bootstrap";
+import { observer } from "mobx-react-lite";
 
-const NavBar = () => {
+const NavBar = observer(() => {
   const { user } = useContext(Context);
   return (
     <Navbar bg="dark" variant="dark">
@@ -19,6 +20,7 @@ const NavBar = () => {
           <Nav className="ml-auto">
             <Button variant={"outline-light"}>Админ панель</Button>
             <Button
+              className="ml-2"
               onClick={() => user.setIsAuth(false)}
               variant={"outline-light"}
             >
@@ -38,6 +40,6 @@ const NavBar = () => {
       </Container>
     </Navbar>
   );
-};
+});
 
 export default NavBar;

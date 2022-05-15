@@ -11,6 +11,13 @@ class TypeController {
     const types = await Type.findAll();
     return res.json(types);
   }
+  async deleteType(req, res) {
+    const { id } = req.params;
+    const item = await Type.destroy({
+      where: { id },
+    });
+    return res.status(204).send("ok");
+  }
 }
 
 module.exports = new TypeController();

@@ -68,6 +68,14 @@ class ItemController {
     return res.json(item);
   }
 
+  async deleteItem(req, res) {
+    const { id } = req.params;
+    const item = await Item.destroy({
+      where: { id },
+    });
+    return res.status(204).send("ok");
+  }
+
   /*async deleteItem(id) {
     if (!id) {
       return { msg: "No Id specified..", payload: 1 };
