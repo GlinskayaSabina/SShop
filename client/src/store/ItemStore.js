@@ -6,9 +6,14 @@ export default class ItemStore {
       { id: 3, name: "Вода, напитки" },
       { id: 4, name: "Сладости" },
     ];
-    this._brands = [{ id: 1, name: "Святой источник" }];
+    this._brands = [
+      { id: 1, name: "Святой источник" },
+      { id: 2, name: "Святой источник" },
+      { id: 3, name: "Святой источник" },
+    ];
     this._items = [{}];
     this._selectedType = {};
+    this._selectedBrand = {};
 
     makeAutoObservable(this);
   }
@@ -25,7 +30,9 @@ export default class ItemStore {
   setSelectedType(type) {
     this._selectedType = type;
   }
-
+  setSelectedBrand(brand) {
+    this._selectedBrand = brand;
+  }
   get Types() {
     return this._types;
   }
@@ -37,5 +44,8 @@ export default class ItemStore {
   }
   get selectedType() {
     return this._selectedType;
+  }
+  get selectedBrand() {
+    return this._selectedBrand;
   }
 }
