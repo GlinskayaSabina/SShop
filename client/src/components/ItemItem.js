@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, Col } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
-
 import { useHistory } from "react-router-dom";
 import { ITEM_ROUTE } from "../utils/consts";
 

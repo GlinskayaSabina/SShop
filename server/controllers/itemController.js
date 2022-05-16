@@ -75,22 +75,6 @@ class ItemController {
     });
     return res.status(204).send("ok");
   }
-
-  /*async deleteItem(id) {
-    if (!id) {
-      return { msg: "No Id specified..", payload: 1 };
-    }
-
-    try {
-      return !!(await products.destroy({
-        where: {
-          id: id,
-        },
-      }));
-    } catch (e) {
-      return false;
-     }
-  }*/
 }
 
 module.exports = new ItemController();

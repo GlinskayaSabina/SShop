@@ -2,36 +2,48 @@ import React, { useContext } from "react";
 import { Context } from "../index";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Container from "react-bootstrap/Container";
-import NavLink from "react-bootstrap/esm/NavLink";
-import { SHOP_ROUTE } from "../utils/consts";
+import { NavLink } from "react-router-dom";
+import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from "../utils/consts";
 import { Button } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
-
+import Container from "react-bootstrap/Container";
+import { useHistory } from "react-router-dom";
 const NavBar = observer(() => {
   const { user } = useContext(Context);
+  const history = useHistory();
+
+  const logOut = () => {
+    user.setUser({});
+    user.setIsAuth(false);
+  };
+
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
         <NavLink style={{ color: "white" }} to={SHOP_ROUTE}>
-          Sshop
+          SShop
         </NavLink>
-        {user.IsAuth ? (
-          <Nav className="ml-auto">
-            <Button variant={"outline-light"}>Админ панель</Button>
+        {user._IsAuth ? (
+          <Nav className="ml-auto" style={{ color: "white" }}>
             <Button
-              className="ml-2"
-              onClick={() => user.setIsAuth(false)}
               variant={"outline-light"}
+              onClick={() => history.push(ADMIN_ROUTE)}
+            >
+              Админ панель
+            </Button>
+            <Button
+              variant={"outline-light"}
+              onClick={() => logOut()}
+              className="ml-2"
             >
               Выйти
             </Button>
           </Nav>
         ) : (
-          <Nav className="ml-auto">
+          <Nav className="ml-auto" style={{ color: "white" }}>
             <Button
-              onClick={() => user.setIsAuth(true)}
               variant={"outline-light"}
+              onClick={() => history.push(LOGIN_ROUTE)}
             >
               Авторизация
             </Button>
