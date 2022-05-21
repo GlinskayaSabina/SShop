@@ -24,7 +24,7 @@ class ItemController {
           ItemInfo.create({
             title: i.title,
             description: i.description,
-            itemId: i.itemId,
+            itemId: item.id,
           })
         );
       }
@@ -37,7 +37,7 @@ class ItemController {
   async getAll(req, res) {
     let { brandId, typeId, limit, page } = req.query;
     page = page || 1;
-    limit = limit || 1;
+    limit = limit || 10;
     let offset = page * limit - limit;
     let items;
     if (!brandId && !typeId) {

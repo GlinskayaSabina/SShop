@@ -24,12 +24,15 @@ const Shop = observer(() => {
   }, []);
 
   useEffect(() => {
-    fetchItems(item.selectedType.id, item.selectedBrand.id, item.page, 2).then(
-      (data) => {
-        item.setItems(data.rows);
-        item.setTotalCount(data.count);
-      }
-    );
+    fetchItems(
+      item.selectedType.id,
+      item.selectedBrand.id,
+      item.page,
+      item.limit
+    ).then((data) => {
+      item.setItems(data.rows);
+      item.setTotalCount(data.count);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item.page, item.selectedType, item.selectedBrand]);
   return (

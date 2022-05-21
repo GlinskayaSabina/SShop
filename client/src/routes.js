@@ -1,8 +1,4 @@
-import Basket from "./pages/Basket";
 import Admin from "./pages/Admin";
-import Shop from "./pages/Shop";
-import Auth from "./pages/Auth";
-import ItemPage from "./pages/ItemPage";
 import {
   ADMIN_ROUTE,
   BASKET_ROUTE,
@@ -11,6 +7,10 @@ import {
   REGISTRATION_ROUTE,
   SHOP_ROUTE,
 } from "./utils/consts";
+import BasketCard from "./pages/BasketCard";
+import Shop from "./pages/Shop";
+import Auth from "./pages/Auth";
+import ItemPage from "./pages/ItemPage";
 
 export const authRoutes = [
   {
@@ -19,9 +19,10 @@ export const authRoutes = [
   },
   {
     path: BASKET_ROUTE,
-    Component: Basket,
+    Component: BasketCard,
   },
 ];
+
 export const publicRoutes = [
   {
     path: SHOP_ROUTE,

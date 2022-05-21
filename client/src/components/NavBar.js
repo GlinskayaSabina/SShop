@@ -3,7 +3,12 @@ import { Context } from "../index";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { NavLink } from "react-router-dom";
-import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from "../utils/consts";
+import {
+  ADMIN_ROUTE,
+  BASKET_ROUTE,
+  LOGIN_ROUTE,
+  SHOP_ROUTE,
+} from "../utils/consts";
 import { Button } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import Container from "react-bootstrap/Container";
@@ -26,11 +31,21 @@ const NavBar = observer(() => {
         {user._IsAuth ? (
           <Nav className="ml-auto" style={{ color: "white" }}>
             <Button
+              className="ml-2"
               variant={"outline-light"}
-              onClick={() => history.push(ADMIN_ROUTE)}
+              onClick={() => history.push(BASKET_ROUTE)}
             >
-              Админ панель
+              Корзина
             </Button>
+            {user._user.role === "ADMIN" && (
+              <Button
+                className="ml-2"
+                variant={"outline-light"}
+                onClick={() => history.push(ADMIN_ROUTE)}
+              >
+                Админ панель
+              </Button>
+            )}
             <Button
               variant={"outline-light"}
               onClick={() => logOut()}

@@ -1,10 +1,11 @@
+import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import CreateBrand from "../components/modals/CreateBrand";
 import CreateItem from "../components/modals/CreateItem";
 import CreateType from "../components/modals/CreateType";
 
-const Admin = () => {
+const Admin = observer(() => {
   const [brandVisible, setBrandVisible] = useState(false);
   const [typeVisible, setTypeVisible] = useState(false);
   const [itemVisible, setItemVisible] = useState(false);
@@ -37,6 +38,6 @@ const Admin = () => {
       <CreateType show={typeVisible} onHide={() => setTypeVisible(false)} />
     </Container>
   );
-};
+});
 
 export default Admin;

@@ -11,7 +11,7 @@ const AppRouter = observer(() => {
   console.log(user);
   return (
     <Switch>
-      {user.isAuth &&
+      {user._IsAuth &&
         authRoutes.map(({ path, Component }) => (
           <Route key={path} path={path} component={Component} exact />
         ))}

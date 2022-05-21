@@ -22,3 +22,6 @@ export const check = async () => {
   localStorage.setItem("token", data.token);
   return jwt_decode(data.token);
 };
+export const buy = async () => {
+  await $authHost.delete("api/basket/all");
+};
