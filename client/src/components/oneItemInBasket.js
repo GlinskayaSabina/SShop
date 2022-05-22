@@ -12,7 +12,7 @@ const OneItemInBasket = ({ item }) => {
         <Row>
           <Col xs={4}>
             <Image
-              src={"http://localhost:5000/" + item.img}
+              src={"https://localhost:5000/" + item.img}
               style={{ width: "100%", maxWidth: 250 }}
             />
           </Col>

@@ -33,7 +33,7 @@ const ItemPage = () => {
           <Image
             width={300}
             height={300}
-            src={"http://localhost:5000/" + item.img}
+            src={"https://localhost:5000/" + item.img}
           />
         </Col>
         <Col md={4}>

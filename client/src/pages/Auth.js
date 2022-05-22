@@ -17,17 +17,22 @@ const Auth = observer(() => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const click = async () => {
+  const click = async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     try {
-      let data;
-      if (isLogin) {
-        data = await login(email, password);
-      } else {
-        data = await registration(email, password);
+      const form = event.currentTarget;
+      if (form.checkValidity() === true) {
+        let data;
+        if (isLogin) {
+          data = await login(email, password);
+        } else {
+          data = await registration(email, password);
+        }
+        user.setUser(data);
+        user.setIsAuth(true);
+        history.push(SHOP_ROUTE);
       }
-      user.setUser(data);
-      user.setIsAuth(true);
-      history.push(SHOP_ROUTE);
     } catch (e) {
       alert(e.response.data.message);
     }
@@ -40,8 +45,9 @@ const Auth = observer(() => {
     >
       <Card style={{ width: 600 }} className="p-5">
         <h2 className="m-auto">{isLogin ? "Авторизация" : "Регистрация"}</h2>
-        <Form className="d-flex flex-column">
+        <Form onSubmit={click} className="d-flex flex-column">
           <Form.Control
+            type="email"
             className="mt-3"
             placeholder="Введите ваш email..."
             value={email}
@@ -65,7 +71,7 @@ const Auth = observer(() => {
                 Есть аккаунт? <NavLink to={LOGIN_ROUTE}>Войдите!</NavLink>
               </div>
             )}
-            <Button variant={"outline-success"} onClick={click}>
+            <Button type="submit" variant={"outline-success"}>
               {isLogin ? "Войти" : "Регистрация"}
             </Button>
           </Row>

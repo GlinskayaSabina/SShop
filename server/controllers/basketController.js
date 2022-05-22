@@ -1,6 +1,13 @@
-const { Basket, BasketItem, Item, ItemInfo } = require("./../models/models");
+const {
+  Basket,
+  BasketItem,
+  Item,
+  ItemInfo,
+  User,
+} = require("./../models/models");
 const jwt = require("jsonwebtoken");
 const { Op } = require("sequelize");
+const sendWebSocketMessage = require("../webSocket");
 
 class BasketController {
   async addItem(req, res) {
@@ -21,9 +28,9 @@ class BasketController {
     try {
       const token = req.headers.authorization.split(" ")[1];
       const user = jwt.verify(token, process.env.SECRET_KEY);
-      console.log(user);
+
       const { id } = await Basket.findOne({ where: { userId: user.id } });
-      console.log(id);
+
       const basket = await BasketItem.findAll({ where: { basketId: id } });
 
       const basketArr = [];
@@ -81,13 +88,15 @@ class BasketController {
   }
   async deleteAll(req, res) {
     const user = req.user;
-    await Basket.findAll({ where: { userId: user.id } }).then(
-      async((basket) => {
-        basket.forEach((element) => {
-          BasketItem.destroy({ where: { basketId: element.id } });
-        });
-      })
+    const usermodel = await User.findOne({ where: { id: user.id } });
+    let sum = 0;
+    await Basket.findOne({ where: { userId: user.id } }).then(
+      async (basket) => {
+        const { id } = basket;
+        BasketItem.destroy({ where: { basketId: id } });
+      }
     );
+    sendWebSocketMessage(`${usermodel.email} совершил покупку.`);
     return res.status(204).send("buy");
   }
 }

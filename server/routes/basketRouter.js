@@ -5,6 +5,7 @@ const authMiddleware = require("./../middleware/authMiddleware");
 const checkDeleteDeviceFromBasket = require("./../middleware/checkDeleteDeviceFromBasket");
 
 router
+  .post("/all", authMiddleware, BasketController.deleteAll)
   .post("/", authMiddleware, BasketController.addItem)
   .get("/", authMiddleware, BasketController.getItem)
   .delete(
@@ -12,7 +13,6 @@ router
     authMiddleware,
     checkDeleteDeviceFromBasket,
     BasketController.deleteItem
-  )
-  .delete("/all", authMiddleware, BasketController.deleteAll);
+  );
 
 module.exports = router;

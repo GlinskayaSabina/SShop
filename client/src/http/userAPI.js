@@ -23,5 +23,5 @@ export const check = async () => {
   return jwt_decode(data.token);
 };
 export const buy = async () => {
-  await $authHost.delete("api/basket/all");
+  await $authHost.post("api/basket/all");
 };
